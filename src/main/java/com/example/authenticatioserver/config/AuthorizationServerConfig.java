@@ -81,7 +81,7 @@ public class AuthorizationServerConfig {
             .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
             .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
             .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-            .redirectUri("http://127.0.0.1:8080/login/oauth2/code/api-client-oidc")
+            .redirectUri("http://127.0.0.1:4200/login/oauth2/code/api-client-oidc")
 //                .redirectUri("http://127.0.0.1:8080/authorized")
             .scope(OidcScopes.OPENID)
             .scope("read")
@@ -97,47 +97,7 @@ public class AuthorizationServerConfig {
                 .build())
             .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
             .build();
-
-        RegisteredClient registeredClient2 = RegisteredClient.withId(UUID.randomUUID().toString())
-            .clientId("app-client")
-            .clientSecret("{noop}test")
-            .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
-            .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
-            .authorizationGrantType(AuthorizationGrantType.PASSWORD)
-            .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-            .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-            .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-            .redirectUri("http://127.0.0.1:8080/login/oauth2/code/api-client-oidc")
-            .redirectUri("http://127.0.0.1:8080/authorized")
-            .scope(OidcScopes.OPENID)
-            .scope("lion.read")
-            .scope("write")
-            .tokenSettings(TokenSettings.builder()
-                .accessTokenTimeToLive(Duration.ofMinutes(10L))
-                .build())
-            .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
-            .build();
-
-        RegisteredClient registeredClient3 = RegisteredClient.withId(UUID.randomUUID().toString())
-            .clientId("web_app")
-            .clientSecret("{noop}web_app")
-            .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
-            .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
-            .authorizationGrantType(AuthorizationGrantType.PASSWORD)
-            .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-            .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-            .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-            .redirectUri("http://127.0.0.1:8080/login/oauth2/code/api-client-oidc")
-            .redirectUri("http://127.0.0.1:8080/authorized")
-            .scope(OidcScopes.OPENID)
-            .scope("read")
-            .scope("profile")
-            .tokenSettings(TokenSettings.builder()
-                .accessTokenTimeToLive(Duration.ofMinutes(10L))
-                .build())
-            .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
-            .build();
-        return new InMemoryRegisteredClientRepository(registeredClient, registeredClient2, registeredClient3);
+        return new InMemoryRegisteredClientRepository(registeredClient);
 //        return new JdbcRegisteredClientRepository();
     }
 

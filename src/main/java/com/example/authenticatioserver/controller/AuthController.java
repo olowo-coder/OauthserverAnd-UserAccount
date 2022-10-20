@@ -22,4 +22,9 @@ public class AuthController {
     public String test(){
         return "Testing";
     }
+
+    @GetMapping("/access")
+    public String access(){
+        return "Access";
+    }
 }
